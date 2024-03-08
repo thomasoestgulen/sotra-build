@@ -4,9 +4,22 @@ import pandas as pd
 import shutil
 from pathlib import Path
 
-
 from sotra import constants as c
 from sotra import helpers
+from sotra.helpers import console
+
+
+
+
+
+def obs_from_cwd() -> list:
+    '''Gets the OBS from durrent directory
+    Returns:
+        OBS code. Ex: ['08.08.06.01']
+    '''  
+    p = Path.cwd()
+    return [p.name]
+
 
 
 def obs_to_txt(obs: str, dest: str) -> None:
@@ -19,9 +32,11 @@ def obs_to_txt(obs: str, dest: str) -> None:
     Returns:
         None
     '''
-    dataframe = get_data(obs)
-    make_files(dataframe, dest)
-    print("Done")
+    console.print(f'[bold red]{obs}[/bold red]')
+    with console.status("Creating placeholders...", spinner='monkey'):
+        dataframe = get_data(obs)
+        make_files(dataframe, dest)
+        console.print("[bold green]Done[/bold green]")
 
 
 def archive(src_dir: str, date: str, obs: str) -> None:

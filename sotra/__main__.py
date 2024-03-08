@@ -14,9 +14,14 @@ def main():
         return
     
     if args.command == "obs":
+        print(args)
         if args.list:
             obs.obs_to_txt(dest=args.dest,
                            obs=[*args.list])
+        if args.cwd:
+            current_obs = obs.obs_from_cwd()
+            obs.obs_to_txt(dest=args.dest,
+                           obs=current_obs)
     
     if args.command == "archive":
         obs.archive(src_dir=args.src,

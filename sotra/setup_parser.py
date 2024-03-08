@@ -52,6 +52,12 @@ def parser():
         nargs="*",
         help="List multiple obs'",
     )
+    one_parser.add_argument(
+        "-c",
+        "--cwd",
+        action='store_true',
+        help="OBS based on current working directory'",
+    )
 
     ### archive models to "Resultatdokument"
     archive_parser = subparsers.add_parser(

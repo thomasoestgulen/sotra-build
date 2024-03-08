@@ -3,6 +3,9 @@
 import pandas as pd
 from pandas import read_excel
 from pathlib import Path
+from rich.console import Console
+
+console = Console()
 
 
 def open_excel_to_dataframe(filepath: str, sheetName: str) -> pd.DataFrame:
