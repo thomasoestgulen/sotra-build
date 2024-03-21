@@ -1,6 +1,7 @@
 '''helpers.py'''
 
 import pandas as pd
+import json
 from pandas import read_excel
 from pathlib import Path
 from rich.console import Console
@@ -19,3 +20,7 @@ def make_txt_file(name: str, path: str, ext: str = '.txt') -> None:
     fpath = Path(path)
     file = fpath / f'{name}{ext}'
     file.touch()
+
+def read_json(filepath: str) -> dict:
+    with open(filepath, 'r', encoding='utf-8') as f:
+        return json.load(f)

@@ -4,8 +4,8 @@ Methods for updating and maintaining the document delivery list
 '''
 
 import pandas as pd
-from pathlib import Path
-import json
+# from pathlib import Path
+# import json
 from datetime import datetime, date
 
 from sotra import constants as c
@@ -142,7 +142,7 @@ def format_data(df: pd.DataFrame, d: dict) -> pd.DataFrame:
 
 def update_revisions():
     df = _get_data()
-    jf = _get_json()
+    jf = helpers.read_json(c.LOG)
     new_df = format_data(df, jf)
     new_df.to_excel('sotra-build_output.xlsx', index=False)
 

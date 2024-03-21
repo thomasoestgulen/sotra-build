@@ -1,4 +1,7 @@
-'''obs.py'''
+'''obs.py
+
+Methods for organizing based on control object
+'''
 
 import pandas as pd
 import shutil

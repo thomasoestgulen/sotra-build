@@ -1,4 +1,7 @@
-'''constants.py'''
+'''constants.py
+
+Constants for use in the project
+'''
 
 from pathlib import Path
 from enum import Enum
@@ -22,7 +25,7 @@ MODEL_NEW_REV = 'New Rev:'
 MODEL_NEW_REV_DATE = 'New Rev.dato:'
 
 
-# Tillate dokumenttypes for leveransepakker
+# Tillate dokumenttyper for leveransepakker
 class DocumentTypes(Enum):
     RAPPORT = '.txt'
     TEGNING = '.txt'
