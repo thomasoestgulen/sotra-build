@@ -3,6 +3,7 @@
 import pandas as pd
 import shutil
 from pathlib import Path
+import re
 
 from sotra import constants as c
 from sotra import helpers
@@ -19,6 +20,30 @@ def obs_from_cwd() -> list:
     '''  
     p = Path.cwd()
     return [p.name]
+
+def is_obs(input: str) -> bool:
+    obs_regex = "^\d{2}.\d{2}.\d{2}.\d{2}"
+    print(input)
+    return bool(re.match(obs_regex, input))
+
+
+def is_dated(input: str) -> bool:
+    date_regex = "^20\d\d-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])"
+    return bool(re.match(date_regex, input))
+
+def re_date(input: str):
+    date_regex = "^20\d\d-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])"
+    return re.match(date_regex ,input).group()
+
+
+def get_date_from_cwd() -> str:
+    path = Path.cwd()
+    parts = path.parts
+    for part in reversed(parts):
+        if is_dated(part):
+            return re_date(part)
+    return None
+
 
 
 
@@ -50,9 +75,10 @@ def archive(src_dir: str, date: str, obs: str) -> None:
     Returns:
         None
     '''
+
     res_docs = c.RESULTAT_DOKUMENTER
     src = Path(src_dir)
-    dst_dir = res_docs / obs / date
+    dst_dir = res_docs / obs[0] / date
     dst_dir.mkdir(parents=True, exist_ok=True)
     for src_file in src.iterdir():
         if src_file.is_file():
